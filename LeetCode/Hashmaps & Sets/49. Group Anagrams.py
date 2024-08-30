@@ -16,7 +16,7 @@ class Solution(object):
             word = sorted(i)
             key = "".join(word)
             myDict[key].append(i)
-
+            
         return myDict.values()
 
 test = Solution()

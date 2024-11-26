@@ -9,45 +9,32 @@
 
 class Solution(object):
     def isValid(self, s):
+        if len(s) % 2 != 0:
+            return False
         stk = []
+        count = 0
         for i in s:
             if i == "(":
-                stk.append("(")
-            elif i == "[":
-                stk.append("[")
+                stk.append(")")
+                count += 1
             elif i == "{":
-                stk.append("{")
-            elif i == ")":
-                if stk:
-                    if stk[-1] == "(":
-                        stk.pop()
-                    else:
-                        return False
-                else:
-                    return False
-            elif i == "]":
-                if stk:
-                    if stk[-1] == "[":
-                        stk.pop()
-                    else:
-                        return False
-                else:
-                    return False
-            elif i == "}":
-                if stk:
-                    if stk[-1] == "{":
-                        stk.pop()
-                    else:
-                        return False
-                else:
-                    return False
+                stk.append("}")
+                count += 1
+            elif i == "[":
+                stk.append("]")
+                count += 1
             else:
-                return False
-        
-        if len(stk) == 0:
-            return True
-        else:
+                count -= 1
+                if stk:
+                    if i == stk[-1]:
+                        stk.pop() 
+                    else:
+                        return False
+        if count < 0:
             return False
+        if len(stk) == 0: 
+            return True
+        return False
 
 test = Solution()
-print(test.isValid("]"))
+print(test.isValid("{[]}"))

@@ -12,14 +12,22 @@ class Solution(object):
         if head is None:
             return None
         
-        randoms = {}
-        nexts = {}
+        hmap = {}
         curr = head
 
+        # 1st run: copy and store values in hmap
         while curr:
-            randoms[curr] = curr.random
-            nexts[curr] = curr.next
+            newNode = Node(curr.val)
+            hmap[curr] = newNode
             curr = curr.next
         
-        print(randoms[0])
-        print(nexts)
+        # 2nd run: use hashmap to assign newNode's next and random
+        curr = head
+        while curr:
+            newNode = hmap[curr]
+            if curr.next:
+                newNode.next = hmap[curr.next]
+            if curr.random:
+                newNode.random = hmap[curr.random]
+            curr = curr.next
+        return hmap[head]

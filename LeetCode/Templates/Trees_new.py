@@ -57,7 +57,7 @@ def level_order(node):
 
     while q:
         node = q.popleft()
-        print(node)
+        print(node.val)
         if node.left:
             q.append(node.left)
         if node.right:

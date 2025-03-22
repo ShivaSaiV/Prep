@@ -69,7 +69,10 @@ C = [-5, 4, 2, 1, 7, 0, 3]
 heap = []
 
 for i in C:
-    heapq.heappush(heap, i)
+    if len(heap) < k:
+        heapq.heappush(heap, i)
+    else:
+        heapq.heappushpop(heap, i)
     # print(heap, len(heap))
 
 

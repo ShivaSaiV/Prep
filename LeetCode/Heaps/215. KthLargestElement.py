@@ -7,6 +7,8 @@ Given an integer array nums and an integer k, return the kth largest element in 
 Note that it is the kth largest element in the sorted order, not the kth distinct element.
 
 Can you solve it without sorting?
+
+length - k
 '''
 
 import heapq
@@ -39,6 +41,45 @@ class Solution2(object):
                 heapq.heappushpop(min_heap, i)
             print(min_heap)
         return min_heap[0]
+
+
+
+# Using Quick-Select
+class Solution3(object):
+    # Time: O(N) - Average
+    def findKthLargest(self, nums, k):
+        target_index = len(nums) - k
+
+        # recursive quickselect algo
+        def quickSelect(l, r):
+            # pivot = rightmost element
+            pivot = nums[r]
+            ptr = l
+
+            for i in range(l, r):
+                # Partition - leftside/rightside based on val
+                if nums[i] <= pivot:
+                    nums[ptr], nums[i] = nums[i], nums[ptr]
+                    ptr += 1
+            
+            nums[ptr], nums[r] = nums[r], nums[ptr]
+            
+            # choose the leftside of the array
+            if ptr > k:
+                return quickSelect(l, ptr - 1)
+            # choose the rightside of the array
+            elif:
+                return quickSelect(ptr + 1, r)
+            # pivot is the ans
+            else:
+                return nums[p]
+        
+        return quickSelect(0, len(nums) - 1)
+
+
+
+
+
 
 
 

@@ -10,8 +10,30 @@ class ListNode(object):
         self.val = val
         self.next = next
 
-
 class Solution(object):
+    def mergeTwoLists(self, list1, list2):
+        dummy = ListNode()
+        tail = dummy
+
+        while l1 and l2:
+            if l1.val < l2.val:
+                tail.next = l1
+                l1 = l1.next
+            else:
+                tail.next = l2
+                l2 = l2.next
+            tail = tail.next
+
+        # If one of them is empty and the other one isn't
+        if l1:
+            tail.next = l1
+        if l2:
+            tail.next = l2
+            
+        return dummy.next
+
+# Use array
+class Solution2(object):
     def mergeTwoLists(self, list1, list2):
         arr1 = []
         c1 = list1

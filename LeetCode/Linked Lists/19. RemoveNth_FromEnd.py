@@ -41,3 +41,52 @@ class Solution(object):
         
         return dummy.next
             
+
+# Iterative 2pass:
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        N = 0
+        cur = head
+        while cur:
+            N += 1
+            cur = cur.next
+        
+        removeIndex = N - n
+        if removeIndex == 0:
+            return head.next
+        
+        cur = head
+        for i in range(N - 1):
+            if (i + 1) == removeIndex:
+                cur.next = cur.next.next
+                break
+            cur = cur.next
+        return head
+            
+
+# 2 Pass
+class Solution:
+    def removeNthFromEnd(self, head, n):
+        if head is None:
+            return None
+        
+        N = 0
+        curr = head
+
+        while curr:
+            N += 1
+            curr = curr.next
+        
+        idx = N - n
+
+        if idx == 0:
+            return head.next
+
+        curr = head
+        for i in range(N - 1):
+            if (i + 1) == idx:
+                curr.next = curr.next.next
+                break
+            curr = curr.next
+        
+        return head
